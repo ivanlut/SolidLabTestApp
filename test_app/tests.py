@@ -38,8 +38,19 @@ class CreateUpdateTestCase(BaseTestCase):
             ),
         )
 
+    # def test_delete_note(self):
+    #     response = self.client.delete(f'{self.prefix}/notes/4')
+    #     self.assertEquals(response.status_code, 200)
+    #     self.assertEquals(Note.objects.count(), 0)
+    #     self.assertEquals(Content.objects.count(), 0)
+    #     data = json.loads(response.content)
+    #     self.assertEquals(data, {
+    #         "id": 4
+    #     })
+
+
     def test_delete_note(self):
-        response = self.client.delete(f'{self.prefix}/notes/4')
+        response = self.client.delete(f'{self.prefix}/notes?id=4')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(Note.objects.count(), 0)
         self.assertEquals(Content.objects.count(), 0)
@@ -150,8 +161,24 @@ class GetTestCase(BaseTestCase):
             }
         ])
 
+    # def test_get_notes_id(self):
+    #     response = self.client.get(f'{self.prefix}/notes/2')
+    #     self.assertEquals(response.status_code, 200)
+    #     data = json.loads(response.content)
+    #     self.assertEquals(data, {
+    #         "id": 2,
+    #         "title": "title_1",
+    #         "content": "text_1",
+    #         "tags": [
+    #             {
+    #                 "id": 2,
+    #                 "name": "name_1"
+    #             }
+    #         ]
+    #     })
+
     def test_get_notes_id(self):
-        response = self.client.get(f'{self.prefix}/notes/2')
+        response = self.client.get(f'{self.prefix}/notes?id=2')
         self.assertEquals(response.status_code, 200)
         data = json.loads(response.content)
         self.assertEquals(data, {
@@ -166,8 +193,16 @@ class GetTestCase(BaseTestCase):
             ]
         })
 
+    # def test_get_notes_id_not_found(self):
+    #     response = self.client.get(f'{self.prefix}/notes/4')
+    #     self.assertEquals(response.status_code, 404)
+    #     data = json.loads(response.content)
+    #     self.assertEquals(data, {
+    #         "detail": "Not found."
+    #     })
+
     def test_get_notes_id_not_found(self):
-        response = self.client.get(f'{self.prefix}/notes/4')
+        response = self.client.get(f'{self.prefix}/notes?id=40')
         self.assertEquals(response.status_code, 404)
         data = json.loads(response.content)
         self.assertEquals(data, {

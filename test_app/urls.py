@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import NoteListAPIView, NoteRetrieveDestroyAPIView, TagListAPIView
+from .views import NoteListAPIView, NoteRetrieveDestroyAPIView, \
+    TagListAPIView, NoteAPIView
 
 urlpatterns = [
-    path('notes', NoteListAPIView.as_view()),
+    path('notes', NoteAPIView.as_view()),
     path('tags', TagListAPIView.as_view()),
-    path('notes/<int:pk>', NoteRetrieveDestroyAPIView.as_view()),
+    # path('notes/<int:pk>', NoteRetrieveDestroyAPIView.as_view()),
 
 ]
